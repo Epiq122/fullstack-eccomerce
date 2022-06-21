@@ -3,6 +3,7 @@ import { useQuery } from 'urql';
 import { PRODUCT_QUERY } from '../lib/query';
 
 import Product from '../components/Product';
+import { Gallery } from '../styles/Gallery';
 
 export default function Home() {
   // fetch products from strappi
@@ -15,6 +16,7 @@ export default function Home() {
   if (fetching) return <p>Loading...</p>;
   if (error) return <p>Oh no..{error.message}</p>;
   const products = data.products.data;
+  console.log(products);
 
   return (
     <div>
@@ -26,9 +28,11 @@ export default function Home() {
 
       <main>
         <h1>Next JS</h1>
-        {products.map((product) => (
-          <Product product={product} key={product.attributes.slug} />
-        ))}
+        <Gallery>
+          {products.map((product) => (
+            <Product product={product} key={product.attributes.slug} />
+          ))}
+        </Gallery>
       </main>
     </div>
   );
